@@ -11,10 +11,11 @@ export interface ProductoI {
   stockMin: number;
   cantidad: number;
   Tipoproductoid: number; // Foreign key for TipoProducto
+  estado?: 'ACTIVO' | 'INACTIVO'; // Added estado
 }
 
 // Define optional attributes for creation
-interface ProductoCreationAttributes extends Optional<ProductoI, "id"> {}
+interface ProductoCreationAttributes extends Optional<ProductoI, "id" | "estado"> {}
 
 // Sequelize Model for Producto
 export class Producto extends Model<ProductoI, ProductoCreationAttributes> {
@@ -25,6 +26,7 @@ export class Producto extends Model<ProductoI, ProductoCreationAttributes> {
   public stockMin!: number;
   public cantidad!: number;
   public Tipoproductoid!: number; // Foreign key
+  public estado!: 'ACTIVO' | 'INACTIVO'; // Added estado
 
   // Timestamps
   public readonly createdAt!: Date;
@@ -69,6 +71,11 @@ export class Producto extends Model<ProductoI, ProductoCreationAttributes> {
             model: TipoProducto,
             key: 'id',
           },
+        },
+        estado: { // Added estado definition
+          type: DataTypes.ENUM('ACTIVO', 'INACTIVO'),
+          allowNull: false,
+          defaultValue: 'ACTIVO',
         },
       },
       {

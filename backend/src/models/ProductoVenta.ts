@@ -5,9 +5,9 @@ import { Venta } from "./Venta"; // Import for association
 // Interface defining the ProductoVenta model attributes
 export interface ProductoVentaI {
   id?: number;
-  Cantidad: string; // Consider INTEGER or FLOAT depending on units
-  precio: string;   // Consider FLOAT
-  total: string;    // Consider FLOAT
+  Cantidad: number; // Changed to number
+  precio: number;   // Changed to number
+  total: number;    // Changed to number
   ProductoId: number; // Foreign key for Producto
   VentaId: number;    // Foreign key for Venta
 }
@@ -18,9 +18,9 @@ interface ProductoVentaCreationAttributes extends Optional<ProductoVentaI, "id">
 // Sequelize Model for ProductoVenta (Junction Table)
 export class ProductoVenta extends Model<ProductoVentaI, ProductoVentaCreationAttributes> {
   public id!: number;
-  public Cantidad!: string;
-  public precio!: string;
-  public total!: string;
+  public Cantidad!: number; // Changed to number
+  public precio!: number;   // Changed to number
+  public total!: number;    // Changed to number
   public ProductoId!: number; // Foreign key
   public VentaId!: number;    // Foreign key
 
@@ -38,15 +38,15 @@ export class ProductoVenta extends Model<ProductoVentaI, ProductoVentaCreationAt
           primaryKey: true,
         },
         Cantidad: {
-          type: DataTypes.STRING, // Consider INTEGER or FLOAT
+          type: DataTypes.INTEGER, // Changed to INTEGER (adjust if FLOAT needed)
           allowNull: false,
         },
         precio: {
-          type: DataTypes.STRING, // Consider FLOAT
+          type: DataTypes.FLOAT, // Changed to FLOAT
           allowNull: false,
         },
         total: {
-          type: DataTypes.STRING, // Consider FLOAT
+          type: DataTypes.FLOAT, // Changed to FLOAT
           allowNull: false,
         },
         ProductoId: {
